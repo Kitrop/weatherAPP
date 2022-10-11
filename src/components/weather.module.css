@@ -64,7 +64,6 @@ body {
 
 .gridItemMain {
     background-image: url("https://i.gifer.com/9Z0P.gif");
-    background-color: red;
     background-size: cover;
     grid-area: main;
 }
