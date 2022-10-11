@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: linear-gradient(90deg, rgba(39,65,66,1) 0%, rgba(38,69,51,1) 100%);
+}
+
+@media screen and (min-width: 750px) {
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-auto-flow: row;
+        gap: 0px 0px;
+        margin-left: 7vw;
+        margin-right: 7vw;
+        margin-top: 6vh;
+        grid-template-areas:
+    "main about"
+    "main city"
+    ". .";
+    }
+
+    .gridItemMain {
+        margin-right: 2vw;
+        height: 600px;
+    }
+    .gridItemAbout {
+        margin-bottom: 2vw;
+        width: 600px;
+    }
+    .gridItemCity {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .gridItemMain {
+        height: 350px;
+        margin-bottom: 2vh;
+    }
+    .gridItemAbout {
+        height: 250px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 0px 0px;
+        margin-left: 4vw;
+        margin-right: 4vw;
+        margin-top: 3vh;
+        grid-template-areas:
+      "main"
+      "about"
+      "city";
+    }
+    .main { grid-area: main; }
+    .about { grid-area: about; }
+    .city { grid-area: city; }
+}
+
+
+.gridItemMain {
+    background-image: url("https://i.gifer.com/9Z0P.gif");
+    background-color: red;
+    background-size: cover;
+    grid-area: main;
+}
+
+
+/* Main */
+
+.mainFont {
+    font-family: 'Segoe UI', sans-serif;
+    margin-left: 3vw;
+}
+
+
+.mainTemp {
+    font-size: 4em;
+}
+
+.mainCity {
+    font-size: 2em;
+    margin-top: 2.5vh;
+}
+
+.mainDescription {
+    font-size: 2em;
+}
+
+.mainFeelLikes {
+    margin-top: 3vh;
+    font-size: 2em;
+}
+
+.mainMaxMin {
+    margin-top: 3vh;
+    font-size: 2em;
+}
+
+
+/*Wind*/
+.windTxt {
+    margin-top: 1.3vh;
+    font-size: 1.6em;
+}
+
+.windHeader {
+    margin-top: 1vh;
+    margin-left: 1.4vw;
+    font-size: 1.5em;
+}
+
+/* grid */
+.gridItemAbout {
+    background-color: green;
+    grid-area: about;
+}
+.gridItemCity {
+    background-color: blue;
+    grid-area: city;
+}
