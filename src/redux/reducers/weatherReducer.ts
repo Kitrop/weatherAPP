@@ -1,4 +1,4 @@
-import {AppStateType, InferActionsTypes} from '../store'
+import {InferActionsTypes, RootState} from '../store'
 import {weatherApi} from '../../api/api'
 import {ThunkDispatch} from '@reduxjs/toolkit'
 
@@ -51,7 +51,7 @@ export const weatherActions = {
 }
 
 // thunkCreator
-export const weatherThunk = () => async (dispatch: ThunkDispatch<AppStateType, unknown, WeatherActions>) => {
+export const weatherThunk = () => async (dispatch: ThunkDispatch<RootState, unknown, WeatherActions>) => {
      let data = await weatherApi.getCurrentWeather()
     dispatch(weatherActions.getWeather(data))
 }

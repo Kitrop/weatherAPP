@@ -1,7 +1,5 @@
-import {applyMiddleware, combineReducers, compose} from '@reduxjs/toolkit'
-import weatherReducer from './reducers/weatherReducer'
-import { createStore } from 'redux'
-import thunk from 'redux-thunk'
+import {combineReducers, compose, configureStore} from '@reduxjs/toolkit'
+import weatherReducer from './reducers/weatherReducerSlice'
 
 // CombineReducer
 let rootReducer = combineReducers({
@@ -10,23 +8,25 @@ let rootReducer = combineReducers({
 
 
 // Create store
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
-
-// declarations
-declare global {
-    interface Window {
-        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
-    }
+export const setupStore = () => {
+    return configureStore({
+        reducer: rootReducer,
+    })
 }
 
-// @ts-ignore
-window.store = store
+// declarations
+// declare global {
+//     interface Window {
+//         __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+//     }
+// }
 
-export default store
 
 // Types
 export type InferActionsTypes<T> = T extends {[keys: string]: (...args: any[]) => infer U} ? U : never
-type RootReducerType = typeof rootReducer;
-export type AppStateType = ReturnType<RootReducerType>
+export type RootState = ReturnType<typeof rootReducer>;
+export type Appstore = ReturnType<typeof setupStore>
+export type AppDispatch = Appstore['dispatch']

@@ -1,16 +1,12 @@
-import {ThunkDispatch} from '@reduxjs/toolkit'
-import {AppStateType} from '../redux/store'
-import {WeatherActions, weatherThunk} from '../redux/reducers/weatherReducer'
-import { useEffect } from 'react'
+import {weatherThunk} from '../redux/reducers/weatherReducer'
+import {useEffect} from 'react'
 import {
-    cloudsSelector,
+    cityNameSelector,
     mainTempSelector,
-    nameSelector,
     visibilitySelector,
     weatherMainSelector,
     windSelector
 } from '../redux/selectors/selector'
-import {useDispatch, useSelector } from 'react-redux'
 import s from './weather.module.css'
 import cn from 'classnames'
 import {
@@ -20,37 +16,37 @@ import {
     ArrowLeft,
     ArrowRight,
     ArrowUp,
-    ArrowUpLeft, ArrowUpRight
+    ArrowUpLeft,
+    ArrowUpRight
 } from 'react-bootstrap-icons'
+import {useAppDispatch, useAppSelector} from '../redux/hooks/reduxHooks'
+import {getWeatherThunk, weatherSlice} from '../redux/reducers/weatherReducerSlice'
 
 
 const Weather = () => {
 
+
     // state
-    const city = useSelector( (state: AppStateType) => nameSelector(state))
-    const weatherMain = useSelector( (state: AppStateType) => weatherMainSelector(state))
-    const mainTemp = useSelector( (state: AppStateType) => mainTempSelector(state))
-    const visibility = useSelector( (state: AppStateType) => visibilitySelector(state))
-    const wind = useSelector( (state: AppStateType) => windSelector(state))
+    const city = useAppSelector(state => cityNameSelector(state))
+    const weatherMain = useAppSelector( state => weatherMainSelector(state))
+    const mainTemp = useAppSelector( state  => mainTempSelector(state))
+    const visibility = useAppSelector( state => visibilitySelector(state))
+    const wind = useAppSelector( state => windSelector(state))
+
+    const what = useAppSelector(state => state.weather.main.humidity)
 
     // dispatch
-    const dispatch: ThunkDispatch<AppStateType, unknown, WeatherActions> = useDispatch()
-
-
-    // thunk
-    const weatherThunk_ = () => dispatch(weatherThunk())
-
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        return () => {
-            weatherThunk_()
-        }
+        dispatch(getWeatherThunk())
     }, [])
 
 
-    // s.grid-item s.grid-item-main
+
     return (
         <div className={s.grid}>
+            {what}
             <div className={s.gridItemMain}>
                 <div className={cn(s.gridItemMain)}>
                     <div className={cn(s.mainTemp, s.mainFont)}>
@@ -97,7 +93,9 @@ const Weather = () => {
                     </div>
                 </div>
             </div>
-            <div className={cn(s.gridItem, s.gridItemCity)}>Город</div>
+            <div className={cn(s.gridItem, s.gridItemCity)}>
+                Город
+            </div>
         </div>
     )
 }
