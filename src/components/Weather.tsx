@@ -1,4 +1,3 @@
-import {weatherThunk} from '../redux/reducers/weatherReducer'
 import {useEffect} from 'react'
 import {
     cityNameSelector,
@@ -20,7 +19,25 @@ import {
     ArrowUpRight
 } from 'react-bootstrap-icons'
 import {useAppDispatch, useAppSelector} from '../redux/hooks/reduxHooks'
-import {getWeatherThunk, weatherSlice} from '../redux/reducers/weatherReducerSlice'
+import {getWeatherThunk} from '../redux/reducers/weatherReducerSlice'
+import styled, { css } from 'styled-components'
+
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 0px;
+  margin-left: 4vw;
+  margin-right: 4vw;
+  margin-top: 3vh;
+  grid-template-areas:
+      "main"
+      "about"
+      "city";
+`
+
+
 
 
 const Weather = () => {
@@ -33,8 +50,6 @@ const Weather = () => {
     const visibility = useAppSelector( state => visibilitySelector(state))
     const wind = useAppSelector( state => windSelector(state))
 
-    const what = useAppSelector(state => state.weather.main.humidity)
-
     // dispatch
     const dispatch = useAppDispatch()
 
@@ -43,28 +58,56 @@ const Weather = () => {
     }, [])
 
 
+    const WeatherWrapper = styled.div`
+        ${weatherMain['0'].main === 'Clouds' && css`
+          background-image: url(https://data.whicdn.com/images/316906851/original.gif);
+          background-size: cover;
+        `}
+        ${weatherMain['0'].main === 'Rain' && css`
+          background-image: url(https://lifeo.ru/wp-content/uploads/gifka-dozhd-18.gif);
+          background-size: cover;
+        `}
+        ${weatherMain['0'].main === 'Snow' && css`
+          background-image: url(https://chehov-vid.ru/upload/iblock/5f9/5f9ca006cc54b035f99ddf1636764da5.gif);
+          background-size: cover;
+        `}
+        ${weatherMain['0'].main === 'Thunderstorm' && css`
+          background-image: url(https://i.gifer.com/7TDQ.gif);
+          background-size: cover;
+        `}
+        ${weatherMain['0'].main === 'Drizzle' && css`
+          background-image: url(https://s02.yapfiles.ru/files/2581434/original.gif);
+          background-size: cover;
+        `}
+        ${weatherMain['0'].main === 'Extreme' && css`
+          background-image: url(https://thumbs.gfycat.com/AchingInformalHypacrosaurus-size_restricted.gif);
+          background-size: cover;
+        `}
+    `
 
     return (
         <div className={s.grid}>
-            {what}
             <div className={s.gridItemMain}>
-                <div className={cn(s.gridItemMain)}>
-                    <div className={cn(s.mainTemp, s.mainFont)}>
-                        {Math.round(mainTemp.temp)}°C
+                <WeatherWrapper>
+                    <div className={cn(s.gridItemMain, )}>
+                        <div className={cn(s.mainTemp, s.mainFont)}>
+                            {Math.round(mainTemp.temp)}°C
+                        </div>
+                        <div className={cn(s.mainCity, s.mainFont)}>
+                            {city}
+                        </div>
+                        <div className={cn(s.mainDescription, s.mainFont)}>
+                            На улице {weatherMain['0'].description}
+                        </div>
+                        <div className={cn(s.mainFeelLikes, s.mainFont)}>
+                            Ощущается как {Math.round(mainTemp.feels_like)}°C
+                        </div>
+                        <div className={cn(s.mainMaxMin, s.mainFont)}>
+                            {Math.round(mainTemp.temp_min)}°C/{Math.round(mainTemp.temp_max)}°C
+                        </div>
                     </div>
-                    <div className={cn(s.mainCity, s.mainFont)}>
-                        {city}
-                    </div>
-                    <div className={cn(s.mainDescription, s.mainFont)}>
-                        На улице {weatherMain['0'].description}
-                    </div>
-                    <div className={cn(s.mainFeelLikes, s.mainFont)}>
-                        Ощущается как {Math.round(mainTemp.feels_like)}°C
-                    </div>
-                    <div className={cn(s.mainMaxMin, s.mainFont)}>
-                        {Math.round(mainTemp.temp_min)}°C/{Math.round(mainTemp.temp_max)}°C
-                    </div>
-                </div>
+                </WeatherWrapper>
+
             </div>
             <div className={cn(s.gridItem, s.gridItemAbout)}>
                 <div className={cn(s.windHeader)}>

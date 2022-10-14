@@ -46,12 +46,12 @@ const weatherReducer = (state = initialState, action: WeatherActions) => {
 }
 
 // ActionCreator
-export const weatherActions = {
+const weatherActions = {
     getWeather: (tom: InitialStateType) => ({type: 'GET_WEATHER', data: tom} as const)
 }
 
 // thunkCreator
-export const weatherThunk = () => async (dispatch: ThunkDispatch<RootState, unknown, WeatherActions>) => {
+const weatherThunk = () => async (dispatch: ThunkDispatch<RootState, unknown, WeatherActions>) => {
      let data = await weatherApi.getCurrentWeather()
     dispatch(weatherActions.getWeather(data))
 }
@@ -59,7 +59,6 @@ export const weatherThunk = () => async (dispatch: ThunkDispatch<RootState, unkn
 
 
 
-export default weatherReducer
 
 
 

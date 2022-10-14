@@ -42,8 +42,8 @@ let initialState: WeatherState = {
 export const getWeatherThunk = createAsyncThunk(
     'weather/getWeather',
     async (_, thunkApi) => {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=55.788320&lon=37.484946&lang=ru&appid=bde816a9134cfdfb0d91449aba12c8f8&units=metric`)
-        return response.data
+        const response = await weatherApi.getCurrentWeather()
+        return response
     }
 )
 
@@ -62,6 +62,7 @@ export const weatherSlice = createSlice({
             state.weather = action.payload.weather
             state.visibility = action.payload.visibility
             state.wind = action.payload.wind
+            state.name = action.payload.name
         }
     }
 })

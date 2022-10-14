@@ -1,11 +1,14 @@
 import React from 'react'
-import './App.css'
 import Weather from './components/Weather'
-import weatherReducerSlice from './redux/reducers/weatherReducerSlice'
+import {createGlobalStyle} from 'styled-components'
+
+
+
+
 function App() {
     return (
-        <div className="App">
-            <Weather />
+        <div>
+            <Weather/>
         </div>
     )
 }
