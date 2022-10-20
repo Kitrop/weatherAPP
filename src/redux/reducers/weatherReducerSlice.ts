@@ -39,15 +39,14 @@ let initialState: WeatherState = {
 
 
 
+
 export const getWeatherThunk = createAsyncThunk(
     'weather/getWeather',
-    async (_, thunkApi) => {
-        const response = await weatherApi.getCurrentWeather()
+    async (cityName: string = 'Moscow') => {
+        const response = await weatherApi.getCurrentWeather(cityName)
         return response
     }
 )
-
-
 
 
 
@@ -63,7 +62,7 @@ export const weatherSlice = createSlice({
             state.visibility = action.payload.visibility
             state.wind = action.payload.wind
             state.name = action.payload.name
-        }
+        },
     }
 })
 
