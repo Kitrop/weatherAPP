@@ -12,7 +12,7 @@ import {getWeatherThunk} from '../redux/reducers/weatherReducerSlice'
 import styled, {css} from 'styled-components'
 import About from './About'
 import WeatherCityForm from './weatherCityForm'
-
+import MainInfo from './Main.tsx'
 
 const Weather = () => {
 
@@ -30,6 +30,7 @@ const Weather = () => {
     const getWeather = (cityName: string) => dispatch(getWeatherThunk(cityName))
 
 
+
     const WeatherWrapper = styled.div`
         ${weatherMain['0'].main === 'Clouds' && css`
           background-image: url(https://data.whicdn.com/images/316906851/original.gif);
@@ -42,6 +43,10 @@ const Weather = () => {
         `}
         ${weatherMain['0'].main === 'Snow' && css`
           background-image: url(https://chehov-vid.ru/upload/iblock/5f9/5f9ca006cc54b035f99ddf1636764da5.gif);
+          background-size: cover;
+        `}        
+        ${weatherMain['0'].main === 'Clear' && css`
+          background-image: url(https://data.whicdn.com/images/316906851/original.gif);
           background-size: cover;
         `}
         ${weatherMain['0'].main === 'Thunderstorm' && css`
@@ -62,23 +67,7 @@ const Weather = () => {
         <div className={s.grid}>
             <div className={s.gridItemMain}>
                 <WeatherWrapper>
-                    <div className={cn(s.gridItemMain, )}>
-                        <div className={cn(s.mainTemp, s.mainFont)}>
-                            {Math.round(mainTemp.temp)}°C
-                        </div>
-                        <div className={cn(s.mainCity, s.mainFont)}>
-                            {city}
-                        </div>
-                        <div className={cn(s.mainDescription, s.mainFont)}>
-                            На улице {weatherMain['0'].description}
-                        </div>
-                        <div className={cn(s.mainFeelLikes, s.mainFont)}>
-                            Ощущается как {Math.round(mainTemp.feels_like)}°C
-                        </div>
-                        <div className={cn(s.mainMaxMin, s.mainFont)}>
-                            {Math.round(mainTemp.temp_min)}°C/{Math.round(mainTemp.temp_max)}°C
-                        </div>
-                    </div>
+                    <MainInfo mainTemp={mainTemp} weatherMain={weatherMain} city={city}/>
                 </WeatherWrapper>
             </div>
             <About visibility={visibility} wind={wind} mainTemp={mainTemp}/>
@@ -89,7 +78,3 @@ const Weather = () => {
 
 
 export default Weather
-
-function useEffect(arg0: () => () => void, arg1: never[]) {
-    throw new Error('Function not implemented.')
-}

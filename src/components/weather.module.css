@@ -53,7 +53,7 @@ body {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-        gap: 0px 0px;
+        gap: 10px 0px;
         margin-left: 4vw;
         margin-right: 4vw;
         margin-top: 3vh;
@@ -84,6 +84,11 @@ body {
     .gridItemAbout {
         height: 250px;
     }
+    .gridItemCity {
+        height: 250px;
+        margin-bottom: 12vh;
+        margin-top: -10vh;
+    }
     .main { grid-area: main; }
     .about { grid-area: about; }
     .city { grid-area: city; }
@@ -91,14 +96,12 @@ body {
 
 
 .gridItemMain {
-    /*background-image: url('../stock/9Z0P.gif');*/
     background-size: cover;
     grid-area: main;
 }
 
 
 /* Main */
-
 .mainFont {
     font-family: 'Segoe UI', sans-serif;
     margin-left: 3vw;
@@ -127,12 +130,57 @@ body {
     font-size: 1.5em;
 }
 
+.select {
+    /* other */
+    display: flex;
+    background: transparent;
+    height: 5vh;
+    width: 50%;
+    cursor: pointer;
+
+    /* text */
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.3em;
+    text-align-last: center;
+    text-align: center;
+
+    /* remove the style from the browser */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+
+    /* border*/
+    border: 1px solid #7E9BBD;
+    border-radius: 3px;
+}
+
+.select option {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.7em;
+}
+
+.blockSelect {
+    margin-top: 4vh;
+    display: flex;
+    justify-content: center;
+}
+
+
 /* grid */
 .gridItemAbout {
-    background-color: green;
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.4px);
+    -webkit-backdrop-filter: blur(2.4px);
+    border: 1px solid rgba(255, 255, 255, 0.34);
     grid-area: about;
 }
 .gridItemCity {
-    background-color: blue;
+    background: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(255, 255, 255, 0.34);
     grid-area: city;
 }

@@ -1,4 +1,4 @@
-import {ErrorMessage, Field, Form, Formik } from "formik";
+import {Field, Form, Formik} from 'formik'
 import cn from 'classnames'
 import s from './weather.module.css'
 import {FC, useEffect} from 'react'
@@ -16,25 +16,27 @@ const WeatherCityForm: FC<Props> = (props) => {
         }
     }, [])
 
-
     return (
         <div className={cn(s.gridItem, s.gridItemCity)}>
             <Formik
                 initialValues={initialValues}
-                onSubmit={(values, { setSubmitting }) => {
-                    props.getWeather(values.cityName)
-                    setSubmitting(false);
+                onSubmit={(values) => {
+                    console.log(values)
                 }}
             >
-                {({ isSubmitting }) => (
+                {({isSubmitting, values, handleChange}) => (
                     <Form>
-                        <Field as="select" name="cityName">
-                            <option value="Moscow">Москва</option>
-                            <option value="Barnaul">Барнаул</option>
-                        </Field>
-                        <button type="submit" disabled={isSubmitting}>
-                            Submit
-                        </button>
+                        <div className={s.blockSelect}>
+                            <Field as="select" name="cityName" onChange={handleChange} className={s.select}>
+                                <option className={s.option} value="Moscow" onClick={() => {props.getWeather(values.cityName)}}> Москва </option>
+                                <option className={s.option} value="Barnaul" onClick={() => {props.getWeather(values.cityName)}}> Барнаул </option>
+                                <option className={s.option} value="Saint Petersburg" onClick={() => {props.getWeather(values.cityName)}}> Санкт-Петербург </option>
+                                <option className={s.option} value="Vladivostok" onClick={() => {props.getWeather(values.cityName)}}> Владивосток </option>
+                                <option className={s.option} value="Biysk" onClick={() => {props.getWeather(values.cityName)}}> Бийск </option>
+                                <option className={s.option} value="Tomsk" onClick={() => {props.getWeather(values.cityName)}}> Томск </option>
+                            </Field>
+                        </div>
+
                     </Form>
                 )}
             </Formik>
