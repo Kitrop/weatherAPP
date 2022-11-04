@@ -6,13 +6,12 @@ import {
     windSelector
 } from '../redux/selectors/selector'
 import s from './weather.module.css'
-import cn from 'classnames'
 import {useAppDispatch, useAppSelector} from '../redux/hooks/reduxHooks'
 import {getWeatherThunk} from '../redux/reducers/weatherReducerSlice'
 import styled, {css} from 'styled-components'
 import About from './About'
 import WeatherCityForm from './weatherCityForm'
-import MainInfo from './Main.tsx'
+import MainInfo from './Main'
 
 const Weather = () => {
 
@@ -59,6 +58,10 @@ const Weather = () => {
         `}
         ${weatherMain['0'].main === 'Extreme' && css`
           background-image: url(https://thumbs.gfycat.com/AchingInformalHypacrosaurus-size_restricted.gif);
+          background-size: cover;
+        `}        
+        ${weatherMain['0'].main === 'Mist' && css`
+          background-image: url(https://i.gifer.com/DfSR.gif);
           background-size: cover;
         `}
     `
